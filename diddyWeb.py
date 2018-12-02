@@ -8,7 +8,7 @@ import PicoBorgRev
 import time
 import sys
 import threading
-import SocketServer
+import socketserver
 import picamera
 import picamera.array
 import cv2
@@ -149,7 +149,7 @@ class ImageCapture(threading.Thread):
                 processor.event.set()
 
 # Class used to implement the web server
-class WebServer(SocketServer.BaseRequestHandler):
+class WebServer(socketserver.BaseRequestHandler):
     def handle(self):
         global PBR
         global lastFrame
@@ -366,7 +366,7 @@ print ('Setup the watchdog')
 watchdog = Watchdog()
 
 # Run the web server until we are told to close
-httpServer = SocketServer.TCPServer(("0.0.0.0", webPort), WebServer)
+httpServer = socketserver.TCPServer(("0.0.0.0", webPort), WebServer)
 try:
     print ('Press CTRL+C to terminate the web-server')
     while running:
